@@ -23,11 +23,13 @@ Raycasting := class(creative_device):
 
     SpawnRaycastProp()<suspends>:void=
         SpawnedProp := SpawnTarget(GetRandomVector3(vector3{X:=10.0,Y:=10.0, Z:=100.0}, vector3{X:=800.0,Y:=800.0, Z:=150.0}), ScaleProp)
+
         var PossibleProps : []creative_prop = array{}
         for(Obj: GetCreativeObjectsWithTag(raycastTag{})):
             if(Prop:= creative_prop[Obj]):
                 set PossibleProps += array{Prop}
         SelectedProp:= SpawnedProp.GetClosestPropInRange(PossibleProps)
+        
         if(Prop := SelectedProp?):
             spawn. CheckRaycastProp(RaycastProp{Parent:=SpawnedProp, OutputProp:=Prop})
 
@@ -43,7 +45,6 @@ Raycasting := class(creative_device):
                         RaycastPropInst.Parent.Dispose()
                         break
                     
-                    Print("{RaycastPropInst.OutputProp.GetTransform().Scale}")
 
 
     
